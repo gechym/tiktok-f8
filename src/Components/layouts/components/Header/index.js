@@ -2,18 +2,46 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
-import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircleXmark,
+    faEarthAsia,
+    faEllipsisVertical,
+    faMagnifyingGlass,
+    faQuestion,
+    faQuestionCircle,
+    faSpinner,
+    faWhiskeyGlass,
+} from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import { WrapperPopper } from '~/Components/popper';
 import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
+import Menu from '~/Components/popper/Menu';
 
 const cx = classNames.bind(styles);
 
+const menuItem = [
+    {
+        icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
+        title: 'English',
+        to: '/profile',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon>,
+        title: 'Keyboard shortcuts',
+        to: '/upload',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faWhiskeyGlass}></FontAwesomeIcon>,
+        title: 'Feedback and help',
+        to: '/following',
+    },
+];
+
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult] = useState([]);
 
     // useEffect(() => {
     //     // Call API
@@ -65,9 +93,15 @@ function Header() {
                         upload
                     </Button>
 
-                    <Button primary small leftIcon={<FontAwesomeIcon icon={faMagnifyingGlass} />}>
+                    <Button to={'/'} primary small>
                         Login
                     </Button>
+
+                    <Menu items={menuItem}>
+                        <button className={cx('more-btn')}>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                        </button>
+                    </Menu>
                 </div>
             </div>
         </header>
@@ -76,8 +110,7 @@ function Header() {
 
 export default Header;
 
-{
-    /* <Button text small>
+/* <Button text small>
                         upload
                     </Button>
 
@@ -104,4 +137,3 @@ export default Header;
                     <Button rounded outline small className={cx('test-customize')}>
                         customize classes
                     </Button> */
-}

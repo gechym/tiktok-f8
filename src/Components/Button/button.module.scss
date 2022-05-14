@@ -4,7 +4,6 @@
     justify-content: center;
     font-size: 1.6rem;
     font-weight: 700;
-    font-weight: 700;
     padding: 9px 16px;
     min-width: 100px;
     background-color: var(--white);
@@ -27,8 +26,14 @@
     margin-left: 8px;
 }
 
+.icon {
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+}
+
 .primary {
-    color: var(--white);
+    color: var(--white) !important;
     background-color: var(--primary);
     border-color: var(--primary);
 
@@ -56,7 +61,7 @@
 }
 
 .outline {
-    color: var(--primary);
+    color: var(--primary) !important;
     border-color: currentColor;
 
     &:hover {
