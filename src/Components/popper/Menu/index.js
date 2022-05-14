@@ -17,6 +17,7 @@ function Menu({ children, items }) {
     return (
         <Tippy
             interactive
+            visible
             delay={[0, 400]}
             placement="bottom-end"
             render={(attrs) => {

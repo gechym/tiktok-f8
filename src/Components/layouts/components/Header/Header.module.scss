@@ -11,6 +11,7 @@
     justify-content: center;
 }
 .inner {
+    padding: 0px var(--default-layout-horizontal-spacer);
     height: 100%;
     width: var(--default-layout-width);
     display: flex;
@@ -103,4 +104,5 @@
     margin-left: 20px;
     padding: 4px 8px;
     background-color: transparent;
+    cursor: pointer;
 }
