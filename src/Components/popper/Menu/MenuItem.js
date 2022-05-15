@@ -4,10 +4,16 @@ import styles from './menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-function MenuItem({ data }) {
+function MenuItem({ data, onClick }) {
     return (
         <>
-            <Button href={data.to ? data.to : ''} leftIcon={data.icon} className={cx('menu-item')}>
+            <Button
+                to={data.to ? data.to : ''}
+                href={data.href ? data.href : undefined}
+                leftIcon={data.icon}
+                onClick={onClick}
+                className={cx('menu-item')}
+            >
                 {data.title}
             </Button>
         </>

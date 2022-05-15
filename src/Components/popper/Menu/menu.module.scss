@@ -20,3 +20,24 @@
 .menu-popper {
     padding-bottom: 8px;
 }
+
+//
+.header {
+    margin-top: -8px;
+    position: relative;
+    height: 50px;
+}
+
+.back {
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

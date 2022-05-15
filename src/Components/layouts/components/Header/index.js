@@ -7,7 +7,6 @@ import {
     faEarthAsia,
     faEllipsisVertical,
     faMagnifyingGlass,
-    faQuestion,
     faQuestionCircle,
     faSpinner,
     faWhiskeyGlass,
@@ -26,7 +25,25 @@ const menuItem = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
         title: 'English',
-        to: '/profile',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'english',
+                    icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
+                    to: '/language',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'việt nam',
+                    icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
+                    href: '/language',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon>,
@@ -49,6 +66,17 @@ function Header() {
     //         setSearchResult([1, 2, 3]);
     //     }, 3000);
     // });
+
+    const handleOnChang = (item) => {
+        switch (item.type) {
+            case 'language':
+                alert('Đổi ngôn ngữ');
+                break;
+
+            default:
+                break;
+        }
+    };
 
     return (
         <header className={cx('wrapper')}>
@@ -74,7 +102,10 @@ function Header() {
                     }}
                 >
                     <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck={false} />
+                        <input
+                            placeholder="Search accounts and videos"
+                            spellCheck={false}
+                        />
 
                         <button className={cx('clear')}>
                             <FontAwesomeIcon icon={faCircleXmark} />
@@ -97,7 +128,7 @@ function Header() {
                         Login
                     </Button>
 
-                    <Menu items={menuItem}>
+                    <Menu items={menuItem} onChange={handleOnChang}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
