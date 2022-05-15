@@ -76,10 +76,12 @@
     &:hover {
         cursor: pointer;
         background-color: rgba(22, 24, 35, 0.03);
+        color: #333;
     }
 
     &:active {
         background-color: rgba(22, 24, 35, 0.06);
+        color: #333;
     }
 }
 
@@ -107,7 +109,7 @@
 .action-btn {
     background-color: transparent;
     font-size: 2.6rem;
-    padding: 4px 16px;
+    padding: 4px 8px;
 }
 
 .user-avatar {

@@ -10,8 +10,6 @@ import {
     faEarthAsia,
     faEllipsisVertical,
     faGear,
-    faMagnifyingGlass,
-    faMessage,
     faQuestionCircle,
     faSignOut,
     faSpinner,
@@ -25,7 +23,8 @@ import { WrapperPopper } from '~/Components/popper';
 import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
 import Menu from '~/Components/popper/Menu';
-import { InboxIcon, MessageICon, UploadICon } from '~/Components/icons';
+import { InboxIcon, MessageICon, SearchIcon, UploadICon } from '~/Components/icons';
+import Image from '~/Components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -148,7 +147,7 @@ function Header() {
                         <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
 
                         <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon height="2.4rem" width="2.4rem" />
                         </button>
                     </div>
                 </HeadleesTippy>
@@ -188,10 +187,11 @@ function Header() {
                         onChange={handleOnChang}
                     >
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src="https://static.fullstack.edu.vn/static/media/f8-icon.7ad2b161d5e80c87e516.png"
                                 alt="Bao"
+                                fallBack="https://static.fullstack.edu.vn/static/media/f8-icon.7ad2b161d5e80c87e516.png"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
@@ -207,7 +207,7 @@ function Header() {
 
 export default Header;
 
-/* <Button text small>
+/*  <Button text small>
                         upload
                     </Button>
 
