@@ -1,6 +1,7 @@
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import Image from '../Image';
 import styles from './accountItem.modle.scss';
 
 const cx = classNames.bind(styles);
@@ -8,7 +9,7 @@ const cx = classNames.bind(styles);
 function AccountItem() {
     return (
         <div className={cx('wrapper')}>
-            <img
+            <Image
                 className={cx('avatar')}
                 src="https://lh3.googleusercontent.com/a-/AOh14Gh5d1DCsCtsotOD4F6AjnSvAcFpgXm__nK-nCgS=s360-p-rw-no"
                 alt="avt"

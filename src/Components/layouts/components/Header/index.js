@@ -1,30 +1,24 @@
-import { useState } from 'react';
-import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import HeadleesTippy from '@tippyjs/react/headless';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
 import {
-    faCircleXmark,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
     faGear,
     faQuestionCircle,
     faSignOut,
-    faSpinner,
     faUser,
     faWhiskeyGlass,
 } from '@fortawesome/free-solid-svg-icons';
-
-import styles from './Header.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
+import classNames from 'classnames/bind';
+import 'tippy.js/dist/tippy.css';
 import images from '~/assets/images';
-import { WrapperPopper } from '~/Components/popper';
-import AccountItem from '~/Components/AccountItem';
 import Button from '~/Components/Button';
-import Menu from '~/Components/popper/Menu';
-import { InboxIcon, MessageICon, SearchIcon, UploadICon } from '~/Components/icons';
+import { InboxIcon, MessageICon, UploadICon } from '~/Components/icons';
 import Image from '~/Components/Image';
+import Menu from '~/Components/popper/Menu';
+import Search from '../Search';
+import styles from './Header.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -65,15 +59,6 @@ const menuItem = [
 ];
 
 function Header() {
-    const [searchResult] = useState([]);
-
-    // useEffect(() => {
-    //     // Call API
-    //     setTimeout(() => {
-    //         setSearchResult([1, 2, 3]);
-    //     }, 3000);
-    // });
-
     const handleOnChang = (item) => {
         switch (item.type) {
             case 'language':
@@ -116,41 +101,7 @@ function Header() {
             <div className={cx('inner')}>
                 <img src={images.logo} alt="Tiktok" />
 
-                <HeadleesTippy
-                    visible={searchResult.length > 0}
-                    interactive
-                    render={(attrs) => {
-                        return (
-                            <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                                <WrapperPopper>
-                                    <h4 className={cx('search-title')}>Accounts</h4>
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                    <AccountItem />
-                                </WrapperPopper>
-                            </div>
-                        );
-                    }}
-                >
-                    <div className={cx('search')}>
-                        <input
-                            placeholder="Search accounts and videos"
-                            spellCheck={false}
-                        />
-
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-
-                        <button className={cx('search-btn')}>
-                            <SearchIcon height="2.4rem" width="2.4rem" />
-                        </button>
-                    </div>
-                </HeadleesTippy>
+                <Search />
 
                 <div className={cx('actions')}>
                     {currentUser ? (
@@ -175,9 +126,16 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Button text>upload</Button>
+                            <Button
+                                text
+                                onClick={() => {
+                                    alert('cc ');
+                                }}
+                            >
+                                upload
+                            </Button>
 
-                            <Button to={'/'} primary>
+                            <Button to={'/'} small primary>
                                 Login
                             </Button>
                         </>
