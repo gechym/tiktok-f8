@@ -17,7 +17,7 @@ export function UploadICon({ className, width = '3.2rem', height = '3.2rem' }) {
     );
 }
 
-export function MessageICon({ className, width = '3.2rem', height = '3.2rem' }) {
+export function MessageICon({ width = '2.6rem', height = '2.6rem', className }) {
     return (
         <svg
             className={className}
@@ -42,7 +42,7 @@ export function InboxIcon({ className, width = '3.2rem', height = '3.2rem' }) {
             className={className}
             width={width}
             height={height}
-            viewBox="0 0 48 48"
+            viewBox="0 0 32 32"
             fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
         >
@@ -55,7 +55,7 @@ export function InboxIcon({ className, width = '3.2rem', height = '3.2rem' }) {
     );
 }
 
-export function SearchIcon({ className, width = '3.2rem', height = '3.2rem' }) {
+export function SearchIcon({ width = '2.4rem', height = '2.4rem', className }) {
     return (
         <svg
             className={className}
