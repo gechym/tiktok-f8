@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadleesTippy from '@tippyjs/react/headless';
-import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import 'tippy.js/dist/tippy.css';
 
 import { WrapperPopper } from '~/Components/popper';
@@ -12,18 +12,35 @@ import { SearchIcon } from '~/Components/icons';
 
 const cx = classNames.bind(styles);
 
+let so_lan_render = 0;
+
 function Search() {
+    const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
+
+    const [showResult, setShowResult] = useState(true);
+
+    const refInputSearch = useRef();
 
     useEffect(() => {
         setTimeout(() => {
             setSearchResult([1, 2, 3]);
-        }, 3000);
-    });
+        }, 0);
+    }, []);
 
+    const handleClear = () => {
+        setSearchValue('');
+        setSearchResult([]);
+        refInputSearch.current.focus();
+    };
+
+    const handleHideResult = () => setShowResult(false);
+    const handleShowResult = () => setShowResult(true);
+
+    console.log(++so_lan_render);
     return (
         <HeadleesTippy
-            visible={searchResult.length > 0}
+            visible={showResult && searchResult.length > 0 && searchValue.length > 0}
             interactive
             render={(attrs) => {
                 return (
@@ -39,15 +56,27 @@ function Search() {
                     </div>
                 );
             }}
+            onClickOutside={handleHideResult}
         >
             <div className={cx('search')}>
-                <input placeholder="Search accounts and videos" spellCheck={false} />
+                <input
+                    ref={refInputSearch}
+                    value={searchValue}
+                    onChange={(e) => {
+                        setSearchValue(e.target.value);
+                    }}
+                    placeholder="Search accounts and videos"
+                    spellCheck={false}
+                    onFocus={handleShowResult}
+                />
 
-                <button className={cx('clear')}>
-                    <FontAwesomeIcon icon={faCircleXmark} />
-                </button>
+                {!!searchValue && (
+                    <button onClick={handleClear} className={cx('clear')}>
+                        <FontAwesomeIcon icon={faCircleXmark} />
+                    </button>
+                )}
 
-                <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
 
                 <button className={cx('search-btn')}>
                     <SearchIcon height="2.4rem" width="2.4rem" />

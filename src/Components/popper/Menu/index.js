@@ -43,6 +43,7 @@ function Menu({ children, items, onChange = () => {} }) {
             onHidden={() => {
                 setHistory((prev) => prev.splice(0, 1));
             }}
+            hideOnClick="toggle"
             delay={[0, 400]}
             offset={[18, 10]}
             placement="bottom-end"
