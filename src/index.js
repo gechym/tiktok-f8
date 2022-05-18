@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalStyle from '~/Components/GloabaStyle';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+axios.defaults.baseURL = 'https://tiktok.fullstack.edu.vn/api/';
 root.render(
     //<React.StrictMode>
     <GlobalStyle>
         <App />
+        <ToastContainer />
     </GlobalStyle>,
     //</React.StrictMode>,
 );
