@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadleesTippy from '@tippyjs/react/headless';
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import 'tippy.js/dist/tippy.css';
 
 import { WrapperPopper } from '~/Components/popper';
@@ -12,21 +12,34 @@ import { SearchIcon } from '~/Components/icons';
 
 const cx = classNames.bind(styles);
 
-let so_lan_render = 0;
-
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const [showResult, setShowResult] = useState(true);
 
     const refInputSearch = useRef();
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 0);
-    }, []);
+        if (!searchValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        setLoading(true);
+
+        if (searchValue.length > 0) {
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+                .then((res) => res.json())
+                .then((res) => {
+                    setLoading(false);
+                    setSearchResult(res.data);
+                })
+                .catch(() => {
+                    setLoading(false);
+                });
+        }
+    }, [searchValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -37,21 +50,20 @@ function Search() {
     const handleHideResult = () => setShowResult(false);
     const handleShowResult = () => setShowResult(true);
 
-    console.log(++so_lan_render);
     return (
         <HeadleesTippy
-            visible={showResult && searchResult.length > 0 && searchValue.length > 0}
+            visible={showResult && searchResult.length > 0}
             interactive
             render={(attrs) => {
                 return (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <WrapperPopper>
-                            <h4 className={cx('search-title')}>Accounts</h4>
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
-                            <AccountItem />
+                            <h4 className={cx('search-title')}>Accounts</h4>\
+                            {searchResult.map((result) => {
+                                return (
+                                    <AccountItem onClick={() => setSearchResult([])} key={result.id} data={result} />
+                                );
+                            })}
                         </WrapperPopper>
                     </div>
                 );
@@ -70,13 +82,12 @@ function Search() {
                     onFocus={handleShowResult}
                 />
 
-                {!!searchValue && (
+                {!!searchValue && !loading && (
                     <button onClick={handleClear} className={cx('clear')}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
-
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
                 <button className={cx('search-btn')}>
                     <SearchIcon height="2.4rem" width="2.4rem" />

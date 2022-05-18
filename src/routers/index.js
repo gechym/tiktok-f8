@@ -7,7 +7,7 @@ import { OnlyHeaderLayput } from '~/Components/layouts';
 const publicRouters = [
     { path: '/', component: Home },
     { path: '/following', component: Following },
-    { path: '/profile', component: Profile },
+    { path: '/@:nickName', component: Profile },
     { path: '/upload', component: upload, layout: OnlyHeaderLayput },
 ];
 

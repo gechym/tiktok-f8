@@ -141,10 +141,7 @@ function Header() {
                         </>
                     )}
 
-                    <Menu
-                        items={currentUser ? userMenu : menuItem}
-                        onChange={handleOnChang}
-                    >
+                    <Menu items={currentUser ? userMenu : menuItem} onChange={handleOnChang}>
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
