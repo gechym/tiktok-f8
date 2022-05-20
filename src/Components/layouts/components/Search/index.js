@@ -9,14 +9,13 @@ import { WrapperPopper } from '~/Components/popper';
 import styles from './search.module.scss';
 import AccountItem from '~/Components/AccountItem';
 import { SearchIcon } from '~/Components/icons';
-import useQuery from '~/Hooks/useQuery';
 
 const cx = classNames.bind(styles);
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const { data, loading, fetchData } = useQuery(`users/search?q=${encodeURIComponent('')}&type=less`);
+    const [loading, setLoading] = useState(false);
 
     const [showResult, setShowResult] = useState(true);
 
@@ -27,17 +26,20 @@ function Search() {
             setSearchResult([]);
             return;
         }
+        setLoading(true);
 
         if (searchValue.length > 0) {
-            fetchData(`users/search?q=${encodeURIComponent(searchValue)}&type=less`);
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+                .then((res) => res.json())
+                .then((res) => {
+                    setLoading(false);
+                    setSearchResult(res.data);
+                })
+                .catch(() => {
+                    setLoading(false);
+                });
         }
-    }, [searchValue, fetchData]);
-
-    useEffect(() => {
-        if (data.data) {
-            setSearchResult(data.data);
-        }
-    }, [data]);
+    }, [searchValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -56,7 +58,7 @@ function Search() {
                 return (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <WrapperPopper>
-                            <h4 className={cx('search-title')}>Accounts</h4>
+                            <h4 className={cx('search-title')}>Accounts</h4>\
                             {searchResult.map((result) => {
                                 return (
                                     <AccountItem onClick={() => setSearchResult([])} key={result.id} data={result} />
