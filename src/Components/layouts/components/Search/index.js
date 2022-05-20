@@ -9,6 +9,7 @@ import { WrapperPopper } from '~/Components/popper';
 import styles from './search.module.scss';
 import AccountItem from '~/Components/AccountItem';
 import { SearchIcon } from '~/Components/icons';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -16,20 +17,21 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
+    const debonce = useDebounce(searchValue, 500);
 
     const [showResult, setShowResult] = useState(true);
 
     const refInputSearch = useRef();
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debonce.trim()) {
             setSearchResult([]);
             return;
         }
         setLoading(true);
 
-        if (searchValue.length > 0) {
-            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        if (debonce.length > 0) {
+            fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debonce)}&type=less`)
                 .then((res) => res.json())
                 .then((res) => {
                     setLoading(false);
@@ -39,7 +41,7 @@ function Search() {
                     setLoading(false);
                 });
         }
-    }, [searchValue]);
+    }, [debonce]);
 
     const handleClear = () => {
         setSearchValue('');
