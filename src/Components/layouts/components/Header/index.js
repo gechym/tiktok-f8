@@ -57,6 +57,30 @@ const menuItem = [
         to: '/following',
     },
 ];
+const userMenu = [
+    {
+        icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
+        title: 'View Profile ',
+        to: '/@bao',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
+        title: 'Get coins',
+        to: '/cc',
+    },
+    {
+        icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
+        title: 'Setting',
+        to: '/cc',
+    },
+    ...menuItem,
+    {
+        icon: <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon>,
+        title: 'Logout',
+        to: '/cc',
+        separate: true,
+    },
+];
 
 function Header() {
     const handleOnChang = (item) => {
@@ -71,30 +95,6 @@ function Header() {
     };
 
     const currentUser = true;
-    const userMenu = [
-        {
-            icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
-            title: 'View Profile ',
-            to: '/@bao',
-        },
-        {
-            icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
-            title: 'Get coins',
-            to: '/cc',
-        },
-        {
-            icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
-            title: 'Setting',
-            to: '/cc',
-        },
-        ...menuItem,
-        {
-            icon: <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon>,
-            title: 'Logout',
-            to: '/cc',
-            separate: true,
-        },
-    ];
 
     return (
         <header className={cx('wrapper')}>
