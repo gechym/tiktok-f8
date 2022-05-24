@@ -1,3 +1,4 @@
+import { fa42Group } from '@fortawesome/free-brands-svg-icons';
 import {
     faCoins,
     faEarthAsia,
@@ -42,6 +43,23 @@ const menuItem = [
                     title: 'việt nam',
                     icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
                     href: '/language',
+                },
+                {
+                    title: 'Menu cấp 3',
+                    icon: <FontAwesomeIcon icon={fa42Group}></FontAwesomeIcon>,
+                    separate: true,
+                    children: {
+                        title: 'item Menu cấp 3',
+                        data: [
+                            {
+                                type: 'language',
+                                code: 'en',
+                                title: 'english',
+                                icon: <FontAwesomeIcon icon={faEarthAsia}></FontAwesomeIcon>,
+                                to: '/language',
+                            },
+                        ],
+                    },
                 },
             ],
         },
@@ -94,7 +112,7 @@ function Header() {
         }
     };
 
-    const currentUser = true;
+    const currentUser = false;
 
     return (
         <header className={cx('wrapper')}>
