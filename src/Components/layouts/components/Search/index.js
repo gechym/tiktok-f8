@@ -82,7 +82,9 @@ function Search() {
                     ref={refInputSearch}
                     value={searchValue}
                     onChange={(e) => {
-                        setSearchValue(e.target.value);
+                        if (!e.target.value.startsWith(' ') || e.target.value.trim()) {
+                            setSearchValue(e.target.value);
+                        }
                     }}
                     placeholder="Search accounts and videos"
                     spellCheck={false}

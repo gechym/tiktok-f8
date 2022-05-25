@@ -3,12 +3,13 @@ import Following from '~/page/Following';
 import Profile from '~/page/Profile';
 import upload from '~/page/upload';
 import { OnlyHeaderLayput } from '~/Components/layouts';
+import routers from '~/config/router';
 
 const publicRouters = [
-    { path: '/', component: Home },
-    { path: '/following', component: Following },
-    { path: '/@:nickName', component: Profile },
-    { path: '/upload', component: upload, layout: OnlyHeaderLayput },
+    { path: routers.home, component: Home },
+    { path: routers.following, component: Following },
+    { path: routers.profire, component: Profile },
+    { path: routers.upload, component: upload, layout: OnlyHeaderLayput },
 ];
 
 const privateRouters = [];
