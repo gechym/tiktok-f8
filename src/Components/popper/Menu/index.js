@@ -61,7 +61,7 @@ function Menu({ children, items, onChange = () => {} }) {
                                     }}
                                 />
                             )}
-                            {renderDataItems(current)}
+                            <div className={cx('menu-body')}>{renderDataItems(current)}</div>
                         </WrapperPopper>
                     </div>
                 );
