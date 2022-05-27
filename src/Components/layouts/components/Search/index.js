@@ -45,6 +45,23 @@ function Search() {
 
         if (debonce.length > 0) {
             fetchApi();
+
+            // apiService
+            //     .search(debonce, 'less')
+            //     .then((data) => {
+            //         setLoading(false);
+            //         setSearchResult(data);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //         setLoading(false);
+
+            //         if (error.response?.data.msg) {
+            //             throw new Error(error.response.data.msg);
+            //         } else {
+            //             throw new Error(error.message);
+            //         }
+            //     });
         }
     }, [debonce]);
 
@@ -68,16 +85,20 @@ function Search() {
                     return (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <WrapperPopper>
-                                <h4 className={cx('search-title')}>Accounts</h4>\
-                                {searchResult.map((result) => {
-                                    return (
-                                        <AccountItem
-                                            onClick={() => setSearchResult([])}
-                                            key={result.id}
-                                            data={result}
-                                        />
-                                    );
-                                })}
+                                <h4 className={cx('search-title')}>Accounts</h4>
+                                {searchResult.length > 0 ? (
+                                    searchResult.map((result) => {
+                                        return (
+                                            <AccountItem
+                                                onClick={() => setSearchResult([])}
+                                                key={result.id}
+                                                data={result}
+                                            />
+                                        );
+                                    })
+                                ) : (
+                                    <h4 className={cx('search-title')}>kết quả bạn tìm kiếm {searchResult.length}</h4>
+                                )}
                             </WrapperPopper>
                         </div>
                     );

@@ -10,6 +10,10 @@ export const search = async (q, type = 'less') => {
         });
         return res.data;
     } catch (error) {
-        console.log(error);
+        if (error.response?.data.msg) {
+            throw new Error(error.response.data.msg);
+        } else {
+            throw new Error(error.message);
+        }
     }
 };
