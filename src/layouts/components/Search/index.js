@@ -10,7 +10,7 @@ import styles from './search.module.scss';
 import AccountItem from '~/Components/AccountItem';
 import { SearchIcon } from '~/Components/icons';
 import { useDebounce } from '~/hooks';
-import * as apiService from '~/apiService/searchService';
+import * as service from '~/service/searchService';
 
 const cx = classNames.bind(styles);
 
@@ -33,7 +33,7 @@ function Search() {
 
         const fetchApi = async () => {
             try {
-                const res = await apiService.search(debonce, 'less');
+                const res = await service.search(debonce, 'less');
 
                 setLoading(false);
                 setSearchResult(res);
@@ -45,23 +45,6 @@ function Search() {
 
         if (debonce.length > 0) {
             fetchApi();
-
-            // apiService
-            //     .search(debonce, 'less')
-            //     .then((data) => {
-            //         setLoading(false);
-            //         setSearchResult(data);
-            //     })
-            //     .catch((error) => {
-            //         console.log(error);
-            //         setLoading(false);
-
-            //         if (error.response?.data.msg) {
-            //             throw new Error(error.response.data.msg);
-            //         } else {
-            //             throw new Error(error.message);
-            //         }
-            //     });
         }
     }, [debonce]);
 
@@ -90,7 +73,10 @@ function Search() {
                                     searchResult.map((result) => {
                                         return (
                                             <AccountItem
-                                                onClick={() => setSearchResult([])}
+                                                onClick={() => {
+                                                    setSearchResult([]);
+                                                    setSearchValue('');
+                                                }}
                                                 key={result.id}
                                                 data={result}
                                             />

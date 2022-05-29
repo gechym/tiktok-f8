@@ -1,4 +1,3 @@
-import { fa42Group } from '@fortawesome/free-brands-svg-icons';
 import {
     faCoins,
     faEarthAsia,
@@ -21,9 +20,9 @@ import Button from '~/Components/Button';
 import { InboxIcon, MessageICon, UploadICon } from '~/Components/icons';
 import Image from '~/Components/Image';
 import Menu from '~/Components/popper/Menu';
-import Search from '../Search';
+import Search from '~/layouts/components/Search';
+import config from '~/config';
 import styles from './Header.module.scss';
-import routers from '~/config/router';
 
 const cx = classNames.bind(styles);
 
@@ -219,7 +218,7 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <Link to={routers.home} className={cx('logo')}>
+                <Link to={config.router.home} className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
                 </Link>
 

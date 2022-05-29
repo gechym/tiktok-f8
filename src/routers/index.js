@@ -2,14 +2,14 @@ import Home from '~/page/Home';
 import Following from '~/page/Following';
 import Profile from '~/page/Profile';
 import upload from '~/page/upload';
-import { OnlyHeaderLayput } from '~/Components/layouts';
-import routers from '~/config/router';
+import { OnlyHeaderLayput } from '~/layouts';
+import config from '~/config';
 
 const publicRouters = [
-    { path: routers.home, component: Home },
-    { path: routers.following, component: Following },
-    { path: routers.profire, component: Profile },
-    { path: routers.upload, component: upload, layout: OnlyHeaderLayput },
+    { path: config.router.home, component: Home },
+    { path: config.router.following, component: Following },
+    { path: config.router.profire, component: Profile },
+    { path: config.router.upload, component: upload, layout: OnlyHeaderLayput },
 ];
 
 const privateRouters = [];

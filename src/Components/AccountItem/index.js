@@ -9,9 +9,9 @@ const cx = classNames.bind(styles);
 
 function AccountItem({ data, onClick }) {
     return (
-        <Link to={`/@${data.nickname}`} className={cx('wrapper')}>
+        <Link onClick={onClick} to={`/@${data.nickname}`} className={cx('wrapper')}>
             <Image className={cx('avatar')} src={data.avatar} alt={data.full_name} />
-            <div onClick={onClick} className={cx('info')}>
+            <div className={cx('info')}>
                 <h4 className={cx('name')}>
                     {data.full_name}
                     {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle} />}
