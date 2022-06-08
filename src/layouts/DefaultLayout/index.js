@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import PropTypes from 'prop-types';
 
 import Header from '~/layouts/components/Header';
 import Sidebar from './Sidebar';
@@ -17,6 +18,10 @@ function DefaultLayout({ children }) {
             </div>
         </div>
     );
+}
+
+DefaultLayout.propTypes = {
+    children : PropTypes.node
 }
 
 export default DefaultLayout;
