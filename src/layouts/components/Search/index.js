@@ -18,14 +18,14 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
-    const debonce = useDebounce(searchValue, 500);
+    const [showResult, setShowResult] = useState(false);
+    const debonceValue = useDebounce(searchValue, 500);
 
-    const [showResult, setShowResult] = useState(true);
 
     const refInputSearch = useRef();
 
     useEffect(() => {
-        if (!debonce.trim()) {
+        if (!debonceValue.trim()) {
             setSearchResult([]);
             return;
         }
@@ -33,7 +33,7 @@ function Search() {
 
         const fetchApi = async () => {
             try {
-                const res = await service.search(debonce, 'less');
+                const res = await service.search(debonceValue, 'less');
 
                 setLoading(false);
                 setSearchResult(res);
@@ -43,10 +43,10 @@ function Search() {
             }
         };
 
-        if (debonce.length > 0) {
+        if (debonceValue.length > 0) {
             fetchApi();
         }
-    }, [debonce]);
+    }, [debonceValue]);
 
     const handleClear = () => {
         setSearchValue('');

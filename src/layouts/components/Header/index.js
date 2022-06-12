@@ -256,7 +256,7 @@ function Header() {
                                 upload
                             </Button>
 
-                            <Button to={'/'} small primary>
+                            <Button href={'/'} primary small>
                                 Login
                             </Button>
                         </>
