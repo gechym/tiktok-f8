@@ -14,7 +14,7 @@ function Menu({ children, items, onChange = () => {} }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
-    const renderDataItems = (current) => {
+    const renderDataItems = () => {
         return current.data.map((item, index) => {
             let isParent = !!item.children;
 
@@ -48,19 +48,19 @@ function Menu({ children, items, onChange = () => {} }) {
                             title={current.title}
                             onBack={() => {
                                 setHistory(
-                                    (prev) => prev.splice(0, prev.length - 1), // cắt một cấp menu trong mảng history
+                                    (prev) => prev.slice(0, prev.length - 1), // cắt một cấp menu trong mảng history
                                 );
                             }}
                         />
                     )}
-                    <div className={cx('menu-body')}>{renderDataItems(current)}</div>
+                    <div className={cx('menu-body')}>{renderDataItems()}</div>
                 </WrapperPopper>
             </div>
         );
     }
 
     const handleResetMenu = () => {
-        setHistory((prev) => prev.splice(0, 1));
+        setHistory((prev) => prev.slice(0, 1));
     }
 
     return (
