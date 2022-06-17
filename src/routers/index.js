@@ -10,6 +10,7 @@ const publicRouters = [
     { path: config.router.following, component: Following },
     { path: config.router.profire, component: Profile },
     { path: config.router.upload, component: upload, layout: OnlyHeaderLayput },
+    { path: config.router.live, component: upload },
 ];
 
 const privateRouters = [];
